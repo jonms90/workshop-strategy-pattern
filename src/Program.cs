@@ -7,10 +7,10 @@ namespace ProductList.App
     {
         private static void Main(string[] args)
         {
-            ProductsViewer viewer = new ProductsViewer(InitProducts());
+            var viewer = new ProductsViewer(InitProducts());
             Console.WriteLine("Check out our awesome products below!\n");
-            List<string> productView = viewer.View();
-            foreach (string entry in productView)
+            var productView = viewer.View();
+            foreach (var entry in productView)
             {
                 Console.WriteLine(entry);
             }

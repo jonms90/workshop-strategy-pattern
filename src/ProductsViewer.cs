@@ -14,8 +14,8 @@ namespace ProductList.App
 
         public List<string> View()
         {
-            List<Product> products = GetProductsSortedByName();
-            List<string> view = new List<string> { $"{"Name:",-20} {"Price:":C2} {"Stock:",5} {"Published:",-20:dd MMMM yyyy}" };
+            var products = GetProductsSortedByName();
+            var view = new List<string> { $"{"Name:",-20} {"Price:":C2} {"Stock:",5} {"Published:",-20:dd MMMM yyyy}" };
             view.AddRange(products.Select(p =>
                     $"{p.Name,-20} {p.Price:C2} {p.AvailableStock,5} {p.Published,20:dd MMMM yyyy}")
                 .ToList());
