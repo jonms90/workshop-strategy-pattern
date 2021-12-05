@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ProductList.App.Strategies;
 
 namespace ProductList.App
 {
@@ -14,37 +15,17 @@ namespace ProductList.App
 
         public List<string> View()
         {
-            var products = GetProductsSortedByName();
+            return View(new NameAscendingStrategy());
+        }
+
+        public List<string> View(ISortingStrategy sortingStrategy)
+        {
+            var products = sortingStrategy.Sort(_products);
             var view = new List<string> { $"{"Name:",-20} {"Price:":C2} {"Stock:",5} {"Published:",-20:dd MMMM yyyy}" };
             view.AddRange(products.Select(p =>
                     $"{p.Name,-20} {p.Price:C2} {p.AvailableStock,5} {p.Published,20:dd MMMM yyyy}")
                 .ToList());
             return view;
-        }
-
-        private List<Product> GetProductsSortedByName()
-        {
-            return _products.OrderBy(p => p.Name).ToList();
-        }
-
-        public IEnumerable<string> ViewByName()
-        {
-            return View();
-        }
-
-        public IEnumerable<string> ViewByCheapest()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<string> ViewByNewest()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<string> ViewByAvailability()
-        {
-            throw new System.NotImplementedException();
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ProductList.App.Strategies;
 
 namespace ProductList.App
 {
@@ -8,21 +9,23 @@ namespace ProductList.App
         private static void Main(string[] args)
         {
             Console.WriteLine("1: List products by name.");
-            Console.WriteLine("2: List products by cheapest. (NOT IMPLEMENTED)");
-            Console.WriteLine("3: List products by newest. (NOT IMPLEMENTED)");
-            Console.WriteLine("4: List products by availability. (NOT IMPLEMENTED)");
+            Console.WriteLine("2: List products by cheapest.");
+            Console.WriteLine("3: List products by newest.");
+            Console.WriteLine("4: List products by availability.");
             Console.Write("Select product order:");
 
-            var sortOrder = Console.ReadKey().Key;
-            var viewer = new ProductsViewer(InitProducts());
-            var view = sortOrder switch
+            var input = Console.ReadKey().Key;
+            ISortingStrategy sortingStrategy = input switch
             {
-                ConsoleKey.D1 => viewer.ViewByName(),
-                ConsoleKey.D2 => viewer.ViewByCheapest(),
-                ConsoleKey.D3 => viewer.ViewByNewest(),
-                ConsoleKey.D4 => viewer.ViewByAvailability(),
-                _ => viewer.ViewByName()
+                ConsoleKey.D1 => new NameAscendingStrategy(),
+                ConsoleKey.D2 => new PriceAscendingStrategy(),
+                ConsoleKey.D3 => new NewestFirstStrategy(),
+                ConsoleKey.D4 => new AvailabilityStrategy(),
+                _ => new NameAscendingStrategy()
             };
+
+            var viewer = new ProductsViewer(InitProducts());
+            var view = viewer.View(sortingStrategy);
 
             Console.WriteLine("\n\nCheck out our awesome products!\n");
             foreach (var entry in view)
