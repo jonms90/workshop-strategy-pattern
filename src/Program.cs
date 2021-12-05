@@ -23,7 +23,7 @@ namespace ProductList.App
                 ConsoleKey.D4 => viewer.ViewByAvailability(),
                 _ => viewer.ViewByName()
             };
-            
+
             Console.WriteLine("\n\nCheck out our awesome products!\n");
             foreach (var entry in view)
             {
