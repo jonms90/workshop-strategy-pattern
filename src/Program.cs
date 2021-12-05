@@ -17,11 +17,11 @@ namespace ProductList.App
             var viewer = new ProductsViewer(InitProducts());
             var view = sortOrder switch
             {
-                ConsoleKey.D1 => viewer.ViewByName(),
-                ConsoleKey.D2 => viewer.ViewByCheapest(),
-                ConsoleKey.D3 => viewer.ViewByNewest(),
-                ConsoleKey.D4 => viewer.ViewByAvailability(),
-                _ => viewer.ViewByName()
+                ConsoleKey.D1 => viewer.View(),
+                ConsoleKey.D2 => throw new NotImplementedException(),
+                ConsoleKey.D3 => throw new NotImplementedException(),
+                ConsoleKey.D4 => throw new NotImplementedException(),
+                _ => viewer.View()
             };
 
             Console.WriteLine("\n\nCheck out our awesome products!\n");
