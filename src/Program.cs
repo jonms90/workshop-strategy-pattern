@@ -7,10 +7,25 @@ namespace ProductList.App
     {
         private static void Main(string[] args)
         {
+            Console.WriteLine("1: List products by name.");
+            Console.WriteLine("2: List products by cheapest. (NOT IMPLEMENTED)");
+            Console.WriteLine("3: List products by newest. (NOT IMPLEMENTED)");
+            Console.WriteLine("4: List products by availability. (NOT IMPLEMENTED)");
+            Console.Write("Select product order:");
+
+            var sortOrder = Console.ReadKey().Key;
             var viewer = new ProductsViewer(InitProducts());
-            Console.WriteLine("Check out our awesome products below!\n");
-            var productView = viewer.View();
-            foreach (var entry in productView)
+            var view = sortOrder switch
+            {
+                ConsoleKey.D1 => viewer.ViewByName(),
+                ConsoleKey.D2 => viewer.ViewByCheapest(),
+                ConsoleKey.D3 => viewer.ViewByNewest(),
+                ConsoleKey.D4 => viewer.ViewByAvailability(),
+                _ => viewer.ViewByName()
+            };
+            
+            Console.WriteLine("\n\nCheck out our awesome products!\n");
+            foreach (var entry in view)
             {
                 Console.WriteLine(entry);
             }

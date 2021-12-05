@@ -26,6 +26,26 @@ namespace ProductList.App
         {
             return _products.OrderBy(p => p.Name).ToList();
         }
+
+        public IEnumerable<string> ViewByName()
+        {
+            return View();
+        }
+
+        public IEnumerable<string> ViewByCheapest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<string> ViewByNewest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<string> ViewByAvailability()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 
